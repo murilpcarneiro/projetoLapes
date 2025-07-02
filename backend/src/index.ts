@@ -1,15 +1,13 @@
-import express, { Request, Response } from 'express';
-import { createServer } from 'http';
+import express from 'express';
+import { errorHandler } from 'interfaces/middlewares/errorHandler.middleware';
+import authRoutes from 'routes/auth.routes';
 
 const app = express();
 
-app.get('/', (req: Request, res: Response) => {
-  res.send('Hello, World!');
-});
-
-const server = createServer(app);
+app.use(express.json());
+app.use(errorHandler);
+app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Server is running on ${PORT}`);
-});
+
+app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
