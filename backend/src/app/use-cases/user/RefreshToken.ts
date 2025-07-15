@@ -4,12 +4,12 @@ interface RefreshTokenInput {
   refreshToken: string;
 }
 
-interface RefreshTokenResponse {
+interface RefreshTokenDTO {
   accessToken: string;
 }
 
 export class RefreshToken {
-  async execute({ refreshToken }: RefreshTokenInput): Promise<RefreshTokenResponse> {
+  async execute({ refreshToken }: RefreshTokenInput): Promise<RefreshTokenDTO> {
     try {
       const payload = verifyRefreshToken(refreshToken) as { id: number; role: string };
 

@@ -11,4 +11,8 @@ router.post('/login', (req: Request, res: Response, next: NextFunction) => {
   UserController.login(req, res, next);
 });
 
+router.post('/refresh', (req: Request, res: Response, next: NextFunction) => {
+  UserController.refreshToken(req, res, next);
+});
+
 export default router;
