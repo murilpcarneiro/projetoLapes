@@ -19,4 +19,10 @@ export class PostgresUserRepository implements IUserRepository {
       role: user.role,
     });
   }
+
+  async findById(id: number): Promise<User | null> {
+    const [row] = await db.select().from(users).where(eq(users.id, id)).limit(1);
+    if (!row) return null;
+    return new User(row.name, row.email, row.password, row.role, row.id);
+  }
 }
